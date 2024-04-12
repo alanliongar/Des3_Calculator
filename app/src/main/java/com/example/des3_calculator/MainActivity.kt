@@ -9,6 +9,50 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    private fun calcular(stri: String): Float {
+        var str: String = stri
+        var res: String = ""
+        var lista = mutableListOf<Any>()
+        var resultado: Float? = null
+        for (crt in str) {
+            if (crt.isDigit()) {
+                //res = res + crt
+            } else {
+                if (crt == '.') {
+                    //res = res + crt
+                } else {
+                    resultado = res.toFloatOrNull()
+                    if (crt == '+') {
+                        lista.add(str.substring(0, str.indexOf('+')).toFloat())
+                        str = str.substring(str.indexOf('+') + 1)
+                        lista.add('+')
+                        continue
+                    } else if (crt == '-') {
+                        lista.add(str.substring(0, str.indexOf('-')).toFloat())
+                        str = str.substring(str.indexOf('-') + 1)
+                        lista.add('-')
+                        continue
+                    } else if (crt == 'x') {
+                        lista.add(str.substring(0, str.indexOf('x')).toFloat())
+                        str = str.substring(str.indexOf('x') + 1)
+                        lista.add('x')
+                        continue
+                    } else if (crt == '/') {
+                        lista.add(str.substring(0, str.indexOf('/')).toFloat())
+                        str = str.substring(str.indexOf('/') + 1)
+                        lista.add('/')
+                        continue
+                    }
+                }
+            }
+
+
+        }
+
+
+    }
+
+
     private lateinit var display: TextView
     private lateinit var resultado: TextView
     private lateinit var btn1: Button
@@ -58,32 +102,34 @@ class MainActivity : AppCompatActivity() {
         btn20 = findViewById(R.id.dividir)
         var str1: String = ""
         var str2: String = ""
-        var resu: Float = 0.0f
+        var resu1: Float? = null
+        var resu2: Float? = null
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-    }
+        btn2.setOnClickListener { str1 = str1 + "0" }
+        btn5.setOnClickListener { str1 = str1 + "1" }
+        btn6.setOnClickListener { str1 = str1 + "2" }
+        btn7.setOnClickListener { str1 = str1 + "3" }
+        btn9.setOnClickListener { str1 = str1 + "4" }
+        btn10.setOnClickListener { str1 = str1 + "5" }
+        btn11.setOnClickListener { str1 = str1 + "6" }
+        btn13.setOnClickListener { str1 = str1 + "7" }
+        btn14.setOnClickListener { str1 = str1 + "8" }
+        btn15.setOnClickListener { str1 = str1 + "9" }
+        btn12.setOnClickListener { str1 = str1 + "-" }
+        btn8.setOnClickListener { str1 = str1 + "+" }
+        btn16.setOnClickListener { str1 = str1 + "x" }
+        btn20.setOnClickListener { str1 = str1 + "/" }
+        btn1.setOnClickListener { str1 = str1 + "." }
+        btn17.setOnClickListener {
+            str1 = "" //limpar}
+            btn18.setOnClickListener {
+                str1 = "" //maismenos}
+                btn19.setOnClickListener {
+                    str1 = "" //porcento}
+                    btn4.setOnClickListener {
+                        str1 = str1 + "/" //igual}
+                        btn3.setOnClickListener {
+                            str1 = str1 + "/" //apagar}
+                        }
+                    }
+                }

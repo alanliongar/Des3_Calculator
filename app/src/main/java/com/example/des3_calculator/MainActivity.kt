@@ -12,14 +12,24 @@ class MainActivity : AppCompatActivity() {
     private fun calcular(stri: String): Float {
         var str: String = stri
         var res: String = ""
-        var lista = mutableListOf<Any>()
+        val lista = mutableListOf<Any>()
         var resultado: Float? = null
         for (crt in str) {
             if (crt.isDigit()) {
-                //res = res + crt
+                res = res + crt
+                if (lista.size > 0) {
+                    lista[lista.size - 1] = res.toFloat()
+                } else {
+                    lista.add(res.toFloat())
+                }
             } else {
                 if (crt == '.') {
-                    //res = res + crt
+                    res = res + crt
+                    if (lista.size > 0) {
+                        lista[lista.size - 1] = res.toFloat()
+                    } else {
+                        lista.add(res.toFloat())
+                    }
                 } else {
                     resultado = res.toFloatOrNull()
                     if (crt == '+') {
@@ -33,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                         lista.add('-')
                         continue
                     } else if (crt == 'x') {
+                        println (str.substring(0, str.indexOf('x')))
                         lista.add(str.substring(0, str.indexOf('x')).toFloat())
                         str = str.substring(str.indexOf('x') + 1)
                         lista.add('x')
@@ -45,11 +56,47 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
         }
+        return calculando(lista)
+    }
 
-
+    private fun calculando(lst: MutableList<Any>): Float {
+        var rst: Float? = null
+        var pos: Int
+        while (lst.size > 1) {
+            if ('x' in lst) {
+                pos = lst.indexOf('x')
+                lst[pos - 1] = (lst[pos - 1] as Float) * (lst[pos + 1] as Float)
+                lst.removeAt(pos)
+                lst.removeAt(pos)
+                continue
+            } else {
+                if ('/' in lst) {
+                    pos = lst.indexOf('/')
+                    lst[pos - 1] = (lst[pos - 1] as Float) / (lst[pos + 1] as Float)
+                    lst.removeAt(pos)
+                    lst.removeAt(pos)
+                    continue
+                } else {
+                    if ('+' in lst) {
+                        pos = lst.indexOf('+')
+                        lst[pos - 1] = (lst[pos - 1] as Float) + (lst[pos + 1] as Float)
+                        lst.removeAt(pos)
+                        lst.removeAt(pos)
+                        continue
+                    } else {
+                        if ('-' in lst) {
+                            pos = lst.indexOf('-')
+                            lst[pos - 1] = (lst[pos - 1] as Float) - (lst[pos + 1] as Float)
+                            lst.removeAt(pos)
+                            lst.removeAt(pos)
+                            continue
+                        }
+                    }
+                }
+            }
+        }
+        return (lst[0] as Float)
     }
 
 
@@ -101,35 +148,97 @@ class MainActivity : AppCompatActivity() {
         btn19 = findViewById(R.id.porcento)
         btn20 = findViewById(R.id.dividir)
         var str1: String = ""
-        var str2: String = ""
-        var resu1: Float? = null
-        var resu2: Float? = null
 
-        btn2.setOnClickListener { str1 = str1 + "0" }
-        btn5.setOnClickListener { str1 = str1 + "1" }
-        btn6.setOnClickListener { str1 = str1 + "2" }
-        btn7.setOnClickListener { str1 = str1 + "3" }
-        btn9.setOnClickListener { str1 = str1 + "4" }
-        btn10.setOnClickListener { str1 = str1 + "5" }
-        btn11.setOnClickListener { str1 = str1 + "6" }
-        btn13.setOnClickListener { str1 = str1 + "7" }
-        btn14.setOnClickListener { str1 = str1 + "8" }
-        btn15.setOnClickListener { str1 = str1 + "9" }
-        btn12.setOnClickListener { str1 = str1 + "-" }
-        btn8.setOnClickListener { str1 = str1 + "+" }
-        btn16.setOnClickListener { str1 = str1 + "x" }
-        btn20.setOnClickListener { str1 = str1 + "/" }
-        btn1.setOnClickListener { str1 = str1 + "." }
+        btn2.setOnClickListener {
+            str1 = str1 + "0"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn5.setOnClickListener {
+            str1 = str1 + "1"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn6.setOnClickListener {
+            str1 = str1 + "2"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn7.setOnClickListener {
+            str1 = str1 + "3"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn9.setOnClickListener {
+            str1 = str1 + "4"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn10.setOnClickListener {
+            str1 = str1 + "5"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn11.setOnClickListener {
+            str1 = str1 + "6"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn13.setOnClickListener {
+            str1 = str1 + "7"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn14.setOnClickListener {
+            str1 = str1 + "8"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn15.setOnClickListener {
+            str1 = str1 + "9"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn12.setOnClickListener {
+            str1 = str1 + "-"
+            display.text = str1
+            resultado.text = calcular(str1).toString()
+        }
+        btn8.setOnClickListener {
+            str1 = str1 + "+"
+            display.text = str1
+            resultado.text = calcular(str1).toString()
+        }
+        btn16.setOnClickListener {
+            str1 = str1 + "x"
+            display.text = str1
+            resultado.text = calcular(str1).toString()
+        }
+        btn20.setOnClickListener {
+            str1 = str1 + "/"
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
+        btn1.setOnClickListener {
+            str1 = str1 + "."
+            resultado.text = calcular(str1).toString()
+            display.text = str1
+        }
         btn17.setOnClickListener {
-            str1 = "" //limpar}
-            btn18.setOnClickListener {
-                str1 = "" //maismenos}
-                btn19.setOnClickListener {
-                    str1 = "" //porcento}
-                    btn4.setOnClickListener {
-                        str1 = str1 + "/" //igual}
-                        btn3.setOnClickListener {
-                            str1 = str1 + "/" //apagar}
-                        }
-                    }
-                }
+            str1 = "" //limpar
+        }
+        btn18.setOnClickListener {
+            str1 = str1 //maismenos
+        }
+        btn19.setOnClickListener {
+            str1 = str1 //porcento
+        }
+        btn4.setOnClickListener {
+            display.text = str1
+            resultado.text = calcular(str1).toString()
+        }
+        btn3.setOnClickListener {
+            str1 = str1 + "/" //apagar
+        }
+    }
+}

@@ -21,25 +21,25 @@
             android:id="@+id/resultado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="RESULTADO"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/display"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="RESULTADO" />
 
         <TextView
             android:id="@+id/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="DISPLAY"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/resultado" />
+            app:layout_constraintTop_toBottomOf="@id/resultado"
+            tools:text="DISPLAY" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,7 +48,7 @@
         android:id="@+id/vg_botoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="25dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,205 +56,211 @@
 
         <Button
             android:id="@+id/limpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="C"
             app:layout_constraintBottom_toTopOf="@id/sete"
             app:layout_constraintEnd_toStartOf="@id/maismenos"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/maismenos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="+/-"
             app:layout_constraintBottom_toTopOf="@id/oito"
             app:layout_constraintEnd_toStartOf="@id/porcento"
             app:layout_constraintStart_toEndOf="@id/limpar"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/porcento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="%"
             app:layout_constraintBottom_toTopOf="@id/nove"
             app:layout_constraintEnd_toStartOf="@id/dividir"
             app:layout_constraintStart_toEndOf="@id/maismenos"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/dividir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="/"
             app:layout_constraintBottom_toTopOf="@id/mult"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/porcento"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/sete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="7"
             app:layout_constraintBottom_toTopOf="@id/quatro"
             app:layout_constraintEnd_toStartOf="@id/oito"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/limpar"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/oito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="8"
             app:layout_constraintBottom_toTopOf="@id/cinco"
             app:layout_constraintEnd_toStartOf="@id/nove"
             app:layout_constraintStart_toEndOf="@id/sete"
             app:layout_constraintTop_toBottomOf="@id/maismenos"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/nove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="9"
             app:layout_constraintBottom_toTopOf="@id/seis"
             app:layout_constraintEnd_toStartOf="@id/mult"
             app:layout_constraintStart_toEndOf="@id/oito"
             app:layout_constraintTop_toBottomOf="@id/porcento"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/mult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="x"
             app:layout_constraintBottom_toTopOf="@id/subtrair"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/nove"
             app:layout_constraintTop_toBottomOf="@id/dividir"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            />
 
         <Button
             android:id="@+id/quatro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="4"
             app:layout_constraintBottom_toTopOf="@id/um"
             app:layout_constraintEnd_toStartOf="@id/cinco"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sete"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/sete" />
 
         <Button
             android:id="@+id/cinco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="5"
             app:layout_constraintBottom_toTopOf="@id/dois"
             app:layout_constraintEnd_toStartOf="@id/seis"
             app:layout_constraintStart_toEndOf="@id/quatro"
-            app:layout_constraintTop_toBottomOf="@id/oito"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/oito" />
 
         <Button
             android:id="@+id/seis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="6"
             app:layout_constraintBottom_toTopOf="@id/tres"
             app:layout_constraintEnd_toStartOf="@id/subtrair"
             app:layout_constraintStart_toEndOf="@id/cinco"
-            app:layout_constraintTop_toBottomOf="@id/nove"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp"
-
-            />
+            app:layout_constraintTop_toBottomOf="@id/nove" />
 
         <Button
             android:id="@+id/subtrair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="-"
             app:layout_constraintBottom_toTopOf="@id/somar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/seis"
-            app:layout_constraintTop_toBottomOf="@id/mult"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/mult" />
 
         <Button
             android:id="@+id/um"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="1"
             app:layout_constraintBottom_toTopOf="@id/ponto"
             app:layout_constraintEnd_toStartOf="@id/dois"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quatro"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/quatro" />
 
         <Button
             android:id="@+id/dois"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="2"
             app:layout_constraintBottom_toTopOf="@id/zero"
             app:layout_constraintEnd_toStartOf="@id/tres"
             app:layout_constraintStart_toEndOf="@id/um"
-            app:layout_constraintTop_toBottomOf="@id/cinco"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/cinco" />
 
         <Button
             android:id="@+id/tres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="3"
             app:layout_constraintBottom_toTopOf="@id/apagar"
             app:layout_constraintEnd_toStartOf="@id/somar"
             app:layout_constraintStart_toEndOf="@id/dois"
-            app:layout_constraintTop_toBottomOf="@id/seis"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/seis" />
 
         <Button
             android:id="@+id/somar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="+"
             app:layout_constraintBottom_toTopOf="@id/igual"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tres"
-            app:layout_constraintTop_toBottomOf="@id/subtrair"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/subtrair" />
 
         <Button
             android:id="@+id/ponto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/zero"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/um"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/um" />
 
         <Button
             android:id="@+id/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/apagar"
             app:layout_constraintStart_toEndOf="@id/ponto"
-            app:layout_constraintTop_toBottomOf="@id/dois"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/dois" />
 
         <Button
             android:id="@+id/apagar"
-            android:text="<<"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/igual"
             app:layout_constraintStart_toEndOf="@id/zero"
-            app:layout_constraintTop_toBottomOf="@id/tres"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/tres" />
 
         <Button
             android:id="@+id/igual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="="
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/apagar"
-            app:layout_constraintTop_toBottomOf="@id/somar"
-            tools:layout_height="80dp"
-            tools:layout_width="80dp" />
+            app:layout_constraintTop_toBottomOf="@id/somar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

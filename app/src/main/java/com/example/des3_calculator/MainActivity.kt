@@ -9,95 +9,73 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    private fun calcular(stri: String): Float {
-        var str: String = stri
-        var res: String = ""
-        val lista = mutableListOf<Any>()
-        var resultado: Float? = null
-        for (crt in str) {
-            if (crt.isDigit()) {
-                res = res + crt
-                if (lista.size > 0) {
-                    lista[lista.size - 1] = res.toFloat()
-                } else {
-                    lista.add(res.toFloat())
-                }
+    private fun calcular(expressao: String): Float {
+        val ops = mutableListOf<Char>()
+        val nums = mutableListOf<Float>()
+        var currentNum = ""
+        var lastChar = ' '
+
+        for (char in expressao) {
+            if (char.isDigit() || char == '.') {
+                currentNum += char
             } else {
-                if (crt == '.') {
-                    res = res + crt
-                    if (lista.size > 0) {
-                        lista[lista.size - 1] = res.toFloat()
-                    } else {
-                        lista.add(res.toFloat())
-                    }
-                } else {
-                    resultado = res.toFloatOrNull()
-                    if (crt == '+') {
-                        lista.add(str.substring(0, str.indexOf('+')).toFloat())
-                        str = str.substring(str.indexOf('+') + 1)
-                        lista.add('+')
-                        continue
-                    } else if (crt == '-') {
-                        lista.add(str.substring(0, str.indexOf('-')).toFloat())
-                        str = str.substring(str.indexOf('-') + 1)
-                        lista.add('-')
-                        continue
-                    } else if (crt == 'x') {
-                        println (str.substring(0, str.indexOf('x')))
-                        lista.add(str.substring(0, str.indexOf('x')).toFloat())
-                        str = str.substring(str.indexOf('x') + 1)
-                        lista.add('x')
-                        continue
-                    } else if (crt == '/') {
-                        lista.add(str.substring(0, str.indexOf('/')).toFloat())
-                        str = str.substring(str.indexOf('/') + 1)
-                        lista.add('/')
-                        continue
-                    }
+                if (currentNum.isNotEmpty()) {
+                    nums.add(currentNum.toFloat())
+                    currentNum = ""
                 }
+                while (ops.isNotEmpty() && shouldProcess(char, lastChar)) {
+                    realizarOperacao(nums, ops.removeAt(ops.size - 1))
+                }
+                ops.add(char)
+            }
+            lastChar = char
+        }
+
+        if (currentNum.isNotEmpty()) {
+            nums.add(currentNum.toFloat())
+        }
+
+        // Only process remaining operations if the last character is not an operator needing more input
+        if (shouldCompleteCalculations(lastChar)) {
+            while (ops.isNotEmpty()) {
+                realizarOperacao(nums, ops.removeAt(ops.size - 1))
             }
         }
-        return calculando(lista)
+
+        return nums.lastOrNull() ?: 0f
     }
 
-    private fun calculando(lst: MutableList<Any>): Float {
-        var rst: Float? = null
-        var pos: Int
-        while (lst.size > 1) {
-            if ('x' in lst) {
-                pos = lst.indexOf('x')
-                lst[pos - 1] = (lst[pos - 1] as Float) * (lst[pos + 1] as Float)
-                lst.removeAt(pos)
-                lst.removeAt(pos)
-                continue
-            } else {
-                if ('/' in lst) {
-                    pos = lst.indexOf('/')
-                    lst[pos - 1] = (lst[pos - 1] as Float) / (lst[pos + 1] as Float)
-                    lst.removeAt(pos)
-                    lst.removeAt(pos)
-                    continue
-                } else {
-                    if ('+' in lst) {
-                        pos = lst.indexOf('+')
-                        lst[pos - 1] = (lst[pos - 1] as Float) + (lst[pos + 1] as Float)
-                        lst.removeAt(pos)
-                        lst.removeAt(pos)
-                        continue
-                    } else {
-                        if ('-' in lst) {
-                            pos = lst.indexOf('-')
-                            lst[pos - 1] = (lst[pos - 1] as Float) - (lst[pos + 1] as Float)
-                            lst.removeAt(pos)
-                            lst.removeAt(pos)
-                            continue
-                        }
-                    }
-                }
-            }
-        }
-        return (lst[0] as Float)
+    fun shouldProcess(currentChar: Char, lastChar: Char): Boolean {
+        return !((currentChar == '+' || currentChar == '-' || currentChar == 'x' || currentChar == '/') && (lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/'))
     }
+
+    fun shouldCompleteCalculations(lastChar: Char): Boolean {
+        return !(lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+    }
+
+    fun realizarOperacao(nums: MutableList<Float>, op: Char) {
+        if (nums.size < 2) return
+        val right = nums.removeAt(nums.size - 1)
+        val left = nums.removeAt(nums.size - 1)
+        when (op) {
+            '+' -> nums.add(left + right)
+            '-' -> nums.add(left - right)
+            'x' -> nums.add(left * right)
+            '/' -> nums.add(left / right)
+        }
+    }
+
+    fun precedencia(op: Char): Int = when (op) {
+        '+', '-' -> 1
+        'x', '/' -> 2
+        else -> -1
+    }
+
+
+
+
+
+
 
 
     private lateinit var display: TextView
@@ -226,6 +204,8 @@ class MainActivity : AppCompatActivity() {
         }
         btn17.setOnClickListener {
             str1 = "" //limpar
+            resultado.text = str1
+            display.text = str1
         }
         btn18.setOnClickListener {
             str1 = str1 //maismenos

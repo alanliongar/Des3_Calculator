@@ -20,13 +20,20 @@ class MainActivity : AppCompatActivity() {
                 currentNum += char
             } else {
                 if (currentNum.isNotEmpty()) {
-                    nums.add(currentNum.toFloat())
-                    currentNum = ""
+                    if (char == '%') {
+                        nums.add(currentNum.toFloat() / 100)
+                        currentNum = ""
+                    } else {
+                        nums.add(currentNum.toFloat())
+                        currentNum = ""
+                    }
                 }
                 while (ops.isNotEmpty() && shouldProcess(char, lastChar)) {
                     realizarOperacao(nums, ops.removeAt(ops.size - 1))
                 }
-                ops.add(char)
+                if (char != '%') {
+                    ops.add(char)
+                }
             }
             lastChar = char
         }
@@ -72,12 +79,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
     private lateinit var display: TextView
     private lateinit var resultado: TextView
     private lateinit var btn1: Button
@@ -100,6 +101,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btn18: Button
     private lateinit var btn19: Button
     private lateinit var btn20: Button
+    private var resu: Float = 0.0f
+    private var str1: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -125,100 +128,150 @@ class MainActivity : AppCompatActivity() {
         btn18 = findViewById(R.id.maismenos)
         btn19 = findViewById(R.id.porcento)
         btn20 = findViewById(R.id.dividir)
-        var str1: String = ""
-
+        btn4.isEnabled = false
         btn2.setOnClickListener {
             str1 = str1 + "0"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn5.setOnClickListener {
             str1 = str1 + "1"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn6.setOnClickListener {
             str1 = str1 + "2"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn7.setOnClickListener {
             str1 = str1 + "3"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn9.setOnClickListener {
             str1 = str1 + "4"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn10.setOnClickListener {
             str1 = str1 + "5"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn11.setOnClickListener {
             str1 = str1 + "6"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn13.setOnClickListener {
             str1 = str1 + "7"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn14.setOnClickListener {
             str1 = str1 + "8"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn15.setOnClickListener {
             str1 = str1 + "9"
-            resultado.text = calcular(str1).toString()
+            //resultado.text = calcular(str1).toString()
             display.text = str1
+            btn4.isEnabled = true
         }
         btn12.setOnClickListener {
-            str1 = str1 + "-"
-            display.text = str1
-            resultado.text = calcular(str1).toString()
+            if ((str1.last().isDigit() || str1.last() == '.' || str1.last() == '%') && str1.isNotEmpty()) {
+                str1 = str1 + "-"
+                display.text = str1
+            } else {
+                str1 = str1
+            }
         }
         btn8.setOnClickListener {
-            str1 = str1 + "+"
-            display.text = str1
-            resultado.text = calcular(str1).toString()
+            if ((str1.last().isDigit() || str1.last() == '.' || str1.last() == '%') && str1.isNotEmpty()) {
+                str1 = str1 + "+"
+                display.text = str1
+            } else {
+                str1 = str1
+            }
+            //resultado.text = calcular(str1).toString()
         }
         btn16.setOnClickListener {
-            str1 = str1 + "x"
-            display.text = str1
-            resultado.text = calcular(str1).toString()
+            if ((str1.last().isDigit() || str1.last() == '.' || str1.last() == '%') && str1.isNotEmpty()) {
+                str1 = str1 + "x"
+                display.text = str1
+            } else {
+                str1 = str1
+            }
+            //resultado.text = calcular(str1).toString()
         }
         btn20.setOnClickListener {
-            str1 = str1 + "/"
-            resultado.text = calcular(str1).toString()
-            display.text = str1
+            if (str1.last()
+                    .isDigit() || str1.last() == '.' || str1.last() == '%' && str1.isNotEmpty()
+            ) {
+                str1 = str1 + "/"
+                display.text = str1
+            } else {
+                str1 = str1
+            }
         }
         btn1.setOnClickListener {
-            str1 = str1 + "."
-            resultado.text = calcular(str1).toString()
-            display.text = str1
+            if (str1.isNotEmpty() && (str1.last() != '.' || str1.last() == '%')) {
+                str1 = str1 + "."
+                display.text = str1
+            } else {
+                str1 = str1
+            }
         }
         btn17.setOnClickListener {
             str1 = "" //limpar
             resultado.text = str1
             display.text = str1
         }
-        btn18.setOnClickListener {
-            str1 = str1 //maismenos
-        }
         btn19.setOnClickListener {
-            str1 = str1 //porcento
+            if (str1.isNotEmpty() && (str1.last()
+                    .isDigit() || str1.last() == '.' || str1.last() == '%')
+            ) {
+                str1 = str1 + "%" //porcento
+                display.text = str1
+            } else {
+                str1 = str1
+            }
+
         }
-        btn4.setOnClickListener {
-            display.text = str1
-            resultado.text = calcular(str1).toString()
+        btn4.setOnClickListener {//Igual
+            if (str1.last().isDigit() || str1.last() == '.' || str1.last() == '%') {
+                resu = calcular(str1)
+                resultado.text = resu.toString()
+            } else {
+                str1.dropLast(1)
+                display.text = str1
+                resu = calcular(str1)
+                resultado.text = resu.toString()
+            }
+        }
+        btn18.setOnClickListener {
+            if (resultado.text.isNotEmpty()) {
+                resu = resu * (-1f)
+                resultado.text = resu.toString()
+            } else {
+                str1 = str1 //maismenos
+                display.text = str1
+            }
         }
         btn3.setOnClickListener {
-            str1 = str1 + "/" //apagar
+            str1 = str1.dropLast(1) //apagar
+            display.text = str1
         }
     }
 }

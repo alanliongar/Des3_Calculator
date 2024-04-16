@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun shouldCompleteCalculations(lastChar: Char): Boolean {
-        return !(lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')
+        return !(lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '÷')
     }
 
     fun realizarOperacao(nums: MutableList<Float>, op: Char) {
@@ -68,13 +68,13 @@ class MainActivity : AppCompatActivity() {
             '+' -> nums.add(left + right)
             '-' -> nums.add(left - right)
             'x' -> nums.add(left * right)
-            '/' -> nums.add(left / right)
+            '÷' -> nums.add(left / right)
         }
     }
 
     fun precedencia(op: Char): Int = when (op) {
         '+', '-' -> 1
-        'x', '/' -> 2
+        'x', '÷' -> 2
         else -> -1
     }
 
@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity() {
             if (str1.last()
                     .isDigit() || str1.last() == '.' || str1.last() == '%' && str1.isNotEmpty()
             ) {
-                str1 = str1 + "/"
+                str1 = str1 + "÷"
                 display.text = str1
             } else {
                 str1 = str1

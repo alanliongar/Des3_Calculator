@@ -1,5 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- colors.xml -->
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Cores de fundo para a calculadora -->
+    <color name="verde_claro">#E8F5E9</color> <!-- Verde super clarinho -->
+    <color name="verde_medio">#A5D6A7</color> <!-- Verde suave -->
+    <color name="verde_esmeralda">#2E7D32</color> <!-- Verde esmeralda -->
+
+    <!-- Cor de texto padrão -->
+    <color name="branco">#FFFFFF</color> <!-- Branco para alto contraste -->
+    <color name="vermelho_contraste">#750B0B</color> <!-- Vermelho forte para contraste -->
 </resources>
